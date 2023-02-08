@@ -1,0 +1,6 @@
+domain: k8scloud.site
+layout:
+- go.kubebuilder.io/v3
+projectName: first-k8s-operator
+repo: github.com/engchina/first-k8s-operator
+version: "3"
