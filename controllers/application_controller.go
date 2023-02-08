@@ -55,12 +55,17 @@ func (r *ApplicationReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	l := log.FromContext(ctx)
 
 	// get the Application
+	// 声明一个*Application类型的实例app用来接收我们的CR
 	app := &myappsv1.Application{}
+	// NamespacedName在这里也就是default/application-sample
 	if err := r.Get(ctx, req.NamespacedName, app); err != nil {
+		// err分很多种情况，如果找不到，一般不需要进一步处理，只是说明这个CR被删了而已
 		if errors.IsNotFound(err) {
 			l.Info("the Application is not found")
+			// 直接返回，不带错误，结束本次调谐
 			return ctrl.Result{}, nil
 		}
+		// 除了NotFound之外的错误，比如连不上apiserver等，这时需要打印错误信息，然后返回这个错误以及表示1分钟后重试的Result
 		l.Error(err, "failed to get the Application")
 		return ctrl.Result{RequeueAfter: 1 * time.Minute}, err
 	}
