@@ -1,12 +1,35 @@
 # first-k8s-operator
-// TODO(user): Add simple overview of use/purpose
+Learning Kubernetes Operator with kubebuilder
 
 ## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+A study project
 
 ## Getting Started
 You’ll need a Kubernetes cluster to run against. You can use [KIND](https://sigs.k8s.io/kind) to get a local cluster for testing, or run against a remote cluster.
 **Note:** Your controller will automatically use the current context in your kubeconfig file (i.e. whatever cluster `kubectl cluster-info` shows).
+
+### Initial Project
+```sh
+kubebuilder init --domain=k8scloud.site \
+--repo=github.com/engchina/first-k8s-operator \
+--owner engchina
+```
+
+```sh
+kubebuilder create api \
+--group apps --version v1 --kind Application
+```
+
+### Modify controller-gen version
+```sh
+vi Makefile
+
+---
+#CONTROLLER_TOOLS_VERSION ?= v0.11.1
+CONTROLLER_TOOLS_VERSION ?= v0.11.3
+---
+
+```
 
 ### Running on the cluster
 1. Install Instances of Custom Resources:

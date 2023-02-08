@@ -1,0 +1,20 @@
+apiVersion: apps.k8scloud.site/v1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: application-sample
+    app.kubernetes.io/part-of: first-k8s-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: first-k8s-operator
+    app: nginx
+  name: application-sample
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.23.3
+          ports:
+            - containerPort: 80
